@@ -18,6 +18,7 @@ body, #input {
  margin-top: 0;
  height: 240px;
  width: 240px;
+ font-size: 75%;
 }
 #input {
  position: absolute;
@@ -51,9 +52,11 @@ function appendChat(author, msg) {
   let c = document.getElementById("chat");
   let d = document.createElement("div");
   let s = document.createElement("strong");
-  s = s.appendChild(document.createTextNode(author + ": "));
+  let a = document.createTextNode(author + ": ");
+  s = s.appendChild(a);
   d = d.appendChild(s);
-  d = d.appendChild(document.createTextNode(msg));
+  let m = document.createTextNode(msg);
+  d = d.appendChild(m);
   c = c.appendChild(d);
   c.scrollTop = c.scrollHeight;
 }
