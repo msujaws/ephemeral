@@ -14,11 +14,10 @@ body {
 body, #input {
  font-family: 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;
 }
-pre {
+#chat {
  margin-top: 0;
- overflow-x: hidden;
- overflow-y: scroll;
  height: 240px;
+ width: 240px;
 }
 #input {
  position: absolute;
@@ -37,8 +36,8 @@ pre {
 </style>
 </head>
 <body>
-<pre id="chat">
-</pre>
+<div id="chat">
+</div>
 <div id="typing" hidden="true">Dennis is typing&hellip;</div>
 <input type="text" id="input" />
 <script src="/socket.io/socket.io.js"></script>
@@ -50,7 +49,13 @@ port.postMessage({topic: 'chat1-registration'});
 
 function appendChat(author, msg) {
   let c = document.getElementById("chat");
-  c.textContent = c.textContent + "\n" + author + ": " + msg;
+  let d = document.createElement("d");
+  let s = document.createElement("strong");
+  s.textContent = author + ": ";
+  let m = document.createTextNode(msg);
+  d = d.appendChild(s);
+  d = d.appendChild(m);
+  c = c.appendChild(d);
   c.scrollTop = c.scrollHeight;
 }
 
