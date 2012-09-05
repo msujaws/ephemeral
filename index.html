@@ -73,6 +73,8 @@ port.onmessage = function(e) {
       socket.emit('unshare', {url: data.data.url});
       break;
     case "chat1-message":
+      for (var i in data)
+        dump(i + data[i]);
       dump("with message: " + data.data.message);
       socket.emit('chat1-message', data.data.message);
       break;
