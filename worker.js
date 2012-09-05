@@ -22,18 +22,25 @@ function setAmbientNotification(){
   });
 }
 
+function dump2Sidebar(msg) {
+  if (sidebarPort)
+    sidebarPort.postMessage({topic: 'dump', message: msg});
+}
+
 var handlers = {
   'ambient-update': function(message){
+    dump2Sidebar('handling ambient-update (worker)');
     setAmbientNotification();
   },
   'social.port-closing': function(data, port){
+    dump2Sidebar('port-closing (worker), ' + port);
     if (apiPort == port){
       apiPort.close();
       apiPort = null;
     }
   },
   'social.initialize': function(data, port){
-    dump('social.initialize on port ' + JSON.stringify(port) + '\n');
+    dump2Sidebar('social.initialize on port ' + JSON.stringify(port));
     apiPort = port;
 
     apiPort.postMessage({
@@ -50,7 +57,7 @@ var handlers = {
   },
   'sidebar.registration': function(data, port){
     sidebarPort = port;
-    dump('sidebar.registration completed, connecting to MoTown\n');
+    dump2Sidebar('sidebar.registration completed, connecting to Ephemeral');
 
     sidebarPort.postMessage({
       topic: 'sidebar.user-info',

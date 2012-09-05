@@ -12,11 +12,11 @@ io.configure(function () {
 });
 
 function handler (req, res) {
-  fs.readFile(__dirname + '/index.html',
-  function (err, data) {
+  var url = (req.url == '/') ? '/index.html' : url;
+  fs.readFile(__dirname + url, function (err, data) {
     if (err) {
       res.writeHead(500);
-      return res.end('Error loading index.html');
+      return res.end('Error loading ' + url);
     }
 
     res.writeHead(200);

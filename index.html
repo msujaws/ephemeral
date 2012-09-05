@@ -7,6 +7,7 @@
 <body>
 <h1>Ephemeral</h1>
 <h2>The short-lived social network</h2>
+<textarea id="dump"></textarea>
 <script src="/socket.io/socket.io.js"></script>
 <script>
   port = navigator.mozSocial.getWorker().port;
@@ -29,6 +30,8 @@
 
   port.onmessage = function(e) {
     var data = e.data;
+    var d = document.getElementById("dump");
+    d.textContent = data.message + '\n' + d.textContent;
     // Todo, handle the message.
   };
 }
