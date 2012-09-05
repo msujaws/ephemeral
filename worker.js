@@ -106,6 +106,10 @@ var handlers = {
     dump2Sidebar('registered chat1 port (worker)');
     chat1Port = port;
   },
+  'chat1-message': function(data, port) {
+    dump2Sidebar('got chat1-message (worker)');
+    sidebarPort.postMessage({topic: 'chat1-message', data: data});
+  },
   'chat1-message-response': function(data, port) {
     dump2Sidebar('got chat1-message-response (worker)');
     chat1Port.postMessage({topic: 'chat1-message-response', data: data});
