@@ -19,7 +19,7 @@ function setAmbientNotification(){
       name: 'mentions',
       iconURL: SPRITES.mentionIcon,
       counter: 0,
-      contentPanel: baseUrl + '/social/mentions'
+      contentPanel: baseUrl + '/panel.html'
     }
   });
 }
