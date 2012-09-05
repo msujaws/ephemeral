@@ -27,6 +27,8 @@ function setAmbientNotification(){
 function dump2Sidebar(msg) {
   if (sidebarPort)
     sidebarPort.postMessage({topic: 'dump', message: msg});
+  else
+    dump("\n\n SIDEBAR NOT AVAILABLE: " + msg + "\n\n");
 }
 
 var handlers = {
@@ -49,7 +51,18 @@ var handlers = {
                           unsharedLabel: "Nobody shared me..."
                         }
                       }
-  });
+    });
+  },
+  'social.user-recommend': function(data, port) {
+    dump2Sidebar('got social.user-recommend');
+    sidebarPort.postMessage({topic: 'share',
+                             data: {
+                               url: data.url,
+                             }
+    });
+  },
+  'social.user-unrecommend': function(data, port) {
+    dump2Sidebar('got social.user-unrecommend');
   },
   'ambient-update': function(message){
     dump2Sidebar('handling ambient-update (worker)');
@@ -97,7 +110,7 @@ onconnect = function(e) {
     var handler = handlers[msg.topic];
 
     if (handler == null){
-      dump("No handler found for " + msg.topic + "\n");
+      dump("No handler found for " + msg.topic + "\n\n\n");
     }
     else {
       try {

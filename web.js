@@ -32,8 +32,7 @@ io.sockets.on('connection', function (socket) {
     console.log(data);
   });
   socket.on('share', function(data) {
-    var newMessage = {url: data.url, title: data.title};
-    messages.push(newMessage);
+    messages.push(data.url);
     if (messages.length > 10)
       messages.shift();
     socket.emit('ambient-update', newMessage);

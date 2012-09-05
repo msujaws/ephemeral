@@ -7,11 +7,16 @@
 <body>
 <h1>Ephemeral</h1>
 <h2>The short-lived social network</h2>
-<textarea id="dump"></textarea>
+<textarea id="dump" rows="40"></textarea>
 <script src="/socket.io/socket.io.js"></script>
 <script>
 port = navigator.mozSocial.getWorker().port;
 port.postMessage({topic: 'sidebar.registration'});
+
+function dump(msg) {
+  var d = document.getElementById("dump");
+  d.textContent = msg + '\n' + d.textContent;
+}
 
 var socket = new io.connect(window.location.hostname);
 socket.on('news', function (data) {
@@ -24,14 +29,27 @@ socket.on('ambient-update', function(data) {
 });
 
 socket.on('newsfeed-update', function(data) {
+
   // update the newsfeed
 });
 
 port.onmessage = function(e) {
   var data = e.data;
-  var d = document.getElementById("dump");
-  d.textContent = data.message + '\n' + d.textContent;
-  // Todo, handle the message.
+  dump("Got topic: " + data.topic);
+
+  switch (data.topic) {
+    case "share":
+      socket.emit('share', {url: data.url});
+      break;
+    case "unshare":
+      socket.emit('unshare', {url: data.url});
+      break;
+    case "dump":
+      dump(data.message);
+      break;
+    default:
+      dump("UNHANDLED TOPIC, " + data.topic);
+  }
 };
 
 </script>
