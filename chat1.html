@@ -25,11 +25,6 @@ body {
 port = navigator.mozSocial.getWorker().port;
 port.postMessage({topic: 'chat1-registration'});
 
-function dump(msg) {
-  let d = document.getElementById("dump");
-  d.textContent = msg + '\n' + d.textContent;
-}
-
 function appendChat(author, msg) {
   let c = document.getElementById("chat");
   c.textContent = author + ": " + msg + '\n' + c.textContent;
@@ -38,14 +33,11 @@ function appendChat(author, msg) {
 let socket = new io.connect(window.location.hostname);
 port.onmessage = function(e) {
   let data = e.data;
-  dump("Got topic: " + data.topic);
 
   switch (data.topic) {
     case "chat-response":
       appendChat('Dennis', data.data.message);
       break;
-    default:
-      dump("UNHANDLED TOPIC, " + data.topic);
   }
 };
 
