@@ -51,12 +51,11 @@ port.postMessage({topic: 'chat1-registration'});
 function appendChat(author, msg) {
   let c = document.getElementById("chat");
   let d = document.createElement("div");
-  let s = document.createElement("strong");
-  let a = document.createTextNode(author + ": ");
-  s = s.appendChild(a);
-  d = d.appendChild(s);
-  let m = document.createTextNode(msg);
-  d = d.appendChild(m);
+  let s1 = document.createElement("span");
+  s1.textContent = author + ": ";
+  let s2 = document.createElement("span");
+  s2.textContent = msg;
+  d.innerHTML = "<strong>" + s1.textContent + "</strong>" + s2.textContent;
   c = c.appendChild(d);
   c.scrollTop = c.scrollHeight;
 }
