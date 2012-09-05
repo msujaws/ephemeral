@@ -38,6 +38,9 @@ port.onmessage = function(e) {
     case "chat-response":
       appendChat('Dennis', data.data.message);
       break;
+    default:
+      alert(data.topic + " does not exist");
+      break;
   }
 };
 

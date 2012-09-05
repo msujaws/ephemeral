@@ -112,7 +112,7 @@ var handlers = {
   },
   'chat1-message-response': function(data, port) {
     dump2Sidebar('got chat1-message-response (worker)');
-    chat1Port.postMessage({topic: 'chat1-message-response', data: data});
+    chat1Port.postMessage({topic: 'chat-response', data: data});
   }
 };
 
