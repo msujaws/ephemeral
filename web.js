@@ -12,7 +12,7 @@ io.configure(function () {
 });
 
 function handler (req, res) {
-  var url = (req.url == '/') ? '/index.html' : url;
+  var url = (req.url == '/') ? '/index.html' : req.url;
   fs.readFile(__dirname + url, function (err, data) {
     if (err) {
       res.writeHead(500);
