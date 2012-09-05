@@ -12,6 +12,15 @@
 <ol id="shares">
 </ol>
 <textarea id="dump" rows="20"></textarea>
+<map>
+  <area shape="rect" coords="0,0,29.7%,50%" href="javascript:alert(1)" />
+  <area shape="rect" coords="29.7%,0,67%,50%" href="javascript:alert(2)" />
+  <area shape="rect" coords="67%,0,100%,50%" href="javascript:alert(3)" />
+  <area shape="rect" coords="0,50%,29.7%,100%" href="javascript:alert(4)" />
+  <area shape="rect" coords="29.7%,50%,67%,100%" href="javascript:alert(5)" />
+  <area shape="rect" coords="67%,50%,100%,100%" href="javascript:alert(6)" />
+</map>
+<img src="people.jpg" usemap="#map" style="width:100%" />
 <script src="/socket.io/socket.io.js"></script>
 <script type="application/javascript;version=1.8">
 port = navigator.mozSocial.getWorker().port;
