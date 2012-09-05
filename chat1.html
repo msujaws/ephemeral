@@ -36,6 +36,11 @@ port.onmessage = function(e) {
 
   switch (data.topic) {
     case "chat-response":
+      appendChat('data', data);
+      appendChat('data.data', data.data);
+      appendChat('data.message', data.message);
+      appendChat('data.data.data', data.data.data);
+      appendChat('data.data.message', data.data.message);
       appendChat('Dennis', data.data.message);
       break;
     default:
