@@ -54,12 +54,12 @@ port.onmessage = function(e) {
 
   switch (data.topic) {
     case "share":
-      dump("with url: " + data.url);
-      socket.emit('share', {url: data.url});
+      dump("with url: " + data.data.url);
+      socket.emit('share', {url: data.data.url});
       break;
     case "unshare":
-      dump("with url: " + data.url);
-      socket.emit('unshare', {url: data.url});
+      dump("with url: " + data.data.url);
+      socket.emit('unshare', {url: data.data.url});
       break;
     case "dump":
       dump(data.message);
