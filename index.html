@@ -39,8 +39,8 @@ socket.on('newsfeed-update', function(data) {
   var messages = JSON.parse(data.news);
   s.innerHTML = '';
   for (var i = 0; i < messages.length; i++) {
-    let li = document.createElement('li');
-    let a = document.createElement('a');
+    var li = document.createElement('li');
+    var a = document.createElement('a');
     a.setAttribute("href", messages[i]);
     a.textContent = messages[i];
     li.appendChild(a);
