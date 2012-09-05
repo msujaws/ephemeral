@@ -108,7 +108,7 @@ var handlers = {
   },
   'chat1-message': function(data, port) {
     dump2Sidebar('got chat1-message (worker)');
-    sidebarPort.postMessage({topic: 'chat1-message', data: data});
+    sidebarPort.postMessage({topic: 'chat1-message', message: data.data.message});
   },
   'chat1-message-response': function(data, port) {
     dump2Sidebar('got chat1-message-response (worker)');
