@@ -75,8 +75,8 @@ port.onmessage = function(e) {
     case "chat1-message":
       for (var i in data)
         dump(i + data[i]);
-      dump("with message: " + data.data.message);
-      socket.emit('chat1-message', data.data.message);
+      dump("with message: " + data.message);
+      socket.emit('chat1-message', data.message);
       break;
     case "dump":
       dump(data.message);
