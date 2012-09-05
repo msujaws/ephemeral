@@ -13,7 +13,7 @@ body {
 </style>
 </head>
 <body>
-<img align="left" src="/profile_large.jpg" width="128" height="124" />
+<img align="left" src="/profile_large.jpg" width="128" height="124" style="margin: 5px;" />
 <h1 id="name"></h1>
 <p>Member since July, 2002</p>
 <p>Total shares: 42</p>
@@ -25,7 +25,7 @@ body {
 <li>In the average lifetime, a person will walk the equivalent of 5 times around the equator. 
 </ul>
 <script>
-var name = window.location.search.substring(window.location.search.indexOf("="));
+var name = window.location.search.substring(window.location.search.indexOf("=") + 1);
 document.getElementById("name").textContent = decodeURIComponent(name);
 </script>
 </body>
