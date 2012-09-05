@@ -13,16 +13,16 @@
 </ol>
 <textarea id="dump" rows="40"></textarea>
 <script src="/socket.io/socket.io.js"></script>
-<script>
+<script type="application/javascript;version=1.8">
 port = navigator.mozSocial.getWorker().port;
 port.postMessage({topic: 'sidebar.registration'});
 
 function dump(msg) {
-  var d = document.getElementById("dump");
+  let d = document.getElementById("dump");
   d.textContent = msg + '\n' + d.textContent;
 }
 
-var socket = new io.connect(window.location.hostname);
+let socket = new io.connect(window.location.hostname);
 socket.on('news', function (data) {
   console.log(data);
   socket.emit('my other event', { my: 'data' });
@@ -34,13 +34,13 @@ socket.on('ambient-update', function(data) {
 });
 
 socket.on('newsfeed-update', function(data) {
-  var s = document.getElementById("shares");
+  let s = document.getElementById("shares");
   dump("got newsfeed-udpate (sidebar)");
-  var messages = JSON.parse(data.news);
+  let messages = JSON.parse(data.news);
   s.innerHTML = '';
-  for (var i = 0; i < messages.length; i++) {
-    var li = document.createElement('li');
-    var a = document.createElement('a');
+  for (let i = 0; i < messages.length; i++) {
+    let li = document.createElement('li');
+    let a = document.createElement('a');
     a.setAttribute("href", messages[i]);
     a.textContent = messages[i];
     li.appendChild(a);
@@ -49,7 +49,7 @@ socket.on('newsfeed-update', function(data) {
 });
 
 port.onmessage = function(e) {
-  var data = e.data;
+  let data = e.data;
   dump("Got topic: " + data.topic);
 
   switch (data.topic) {
