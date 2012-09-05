@@ -35,7 +35,7 @@ io.sockets.on('connection', function (socket) {
   socket.on('share', function(data) {
     console.log('got a share message for ' + data.url);
     messages.push(data.url);
-    if (messages.length > 10)
+    if (messages.length > 20)
       messages.shift();
     //socket.broadcast.emit('ambient-update', data.url);
     socket.broadcast.emit('newsfeed-update', {news: JSON.stringify(messages)});
