@@ -59,6 +59,18 @@ socket.on('chat1-message-response', function(data) {
   port.postMessage({topic: 'chat1-message-response', data: data});
 });
 
+socket.on('chat2-message-response', function(data) {
+  port.postMessage({topic: 'chat2-message-response', data: data});
+});
+
+socket.on('chat3-message-response', function(data) {
+  port.postMessage({topic: 'chat3-message-response', data: data});
+});
+
+socket.on('chat4-message-response', function(data) {
+  port.postMessage({topic: 'chat4-message-response', data: data});
+});
+
 port.onmessage = function(e) {
   let data = e.data;
   dump("Got topic: " + data.topic);
@@ -73,10 +85,20 @@ port.onmessage = function(e) {
       socket.emit('unshare', {url: data.data.url});
       break;
     case "chat1-message":
-      for (var i in data)
-        dump(i + data[i]);
       dump("with message: " + data.message);
       socket.emit('chat1-message', data.message);
+      break;
+    case "chat2-message":
+      dump("with message: " + data.message);
+      socket.emit('chat2-message', data.message);
+      break;
+    case "chat3-message":
+      dump("with message: " + data.message);
+      socket.emit('chat3-message', data.message);
+      break;
+    case "chat4-message":
+      dump("with message: " + data.message);
+      socket.emit('chat4-message', data.message);
       break;
     case "dump":
       dump(data.message);
