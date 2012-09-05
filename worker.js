@@ -36,8 +36,16 @@ var handlers = {
     port.postMessage({topic: 'social.user-recommend-prompt-response',
                       data: {
                         url: data.url,
-                        images: SPRITES.bugIcon,
-                        message: "Share me quick!"
+                        images: {
+                          share: SPRITES.bugIcon,
+                          unshare: SPRITES.bugIcon
+                        },
+                        messages: {
+                          shareTooltip: "Share me quick!",
+                          unshareTooltip: "Unshare me!",
+                          sharedLabel: "I was shared with the quickness!",
+                          unsharedLabel: "Nobody shared me..."
+                        }
                       }
   });
   },
