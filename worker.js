@@ -33,8 +33,13 @@ var handlers = {
   },
   'social.user-recommend-prompt': function(data, port) {
     dump2Sidebar('got social.user-recommend-prompt (worker)');
-    apiPort.postMessage('social.user-recommend-prompt-response',
-                        {url: data.url, images: SPRITES.bugIcon, message: "Share me quick!"});
+    apiPort.postMessage({topic: 'social.user-recommend-prompt-response',
+                        data: {
+                          url: data.url,
+                          images: SPRITES.bugIcon,
+                          message: "Share me quick!"
+                        }
+    });
   },
   'ambient-update': function(message){
     dump2Sidebar('handling ambient-update (worker)');
