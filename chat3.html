@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Dennis Mayberry</title>
+<style>
+body {
+ padding: 0;
+ margin: 0;
+}
+#input {
+ position: absolute;
+ bottom: 0;
+ left: 0;
+ width: 100%;
+}
+</style>
+</head>
+<body>
+<pre id="chat">
+</pre>
+<input type="text" id="input" />
+<script src="/socket.io/socket.io.js"></script>
+<script type="application/javascript;version=1.8">
+port = navigator.mozSocial.getWorker().port;
+port.postMessage({topic: 'chat3-registration'});
+
+function appendChat(author, msg) {
+  let c = document.getElementById("chat");
+  c.textContent = author + ": " + msg + '\n' + c.textContent;
+}
+
+let socket = new io.connect(window.location.hostname);
+port.onmessage = function(e) {
+  let data = e.data;
+
+  switch (data.topic) {
+    case "chat-response":
+      appendChat('Sara', data.data.data.message);
+      break;
+    default:
+      alert(data.topic + " does not exist");
+      break;
+  }
+};
+
+let input = document.getElementById("input");
+input.addEventListener("keydown", function(e) {
+  if (e.keyCode == 13) {
+    port.postMessage({topic: 'chat3-message',
+                      data: {
+                        message: input.value
+                      }
+    });
+    appendChat('Me', input.value);
+    input.value = '';
+  }
+});
+</script>
+</body>
+</html>

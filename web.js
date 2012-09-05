@@ -49,4 +49,13 @@ io.sockets.on('connection', function (socket) {
   socket.on('chat1-message', function(message) {
     socket.emit('chat1-message-response', {message: message.split('').reverse().join('')});
   });
+  socket.on('chat2-message', function(message) {
+    socket.emit('chat1-message-response', {message: message.toUpperCase()});
+  });
+  socket.on('chat3-message', function(message) {
+    socket.emit('chat1-message-response', {message: message.toLowerCase()});
+  });
+  socket.on('chat4-message', function(message) {
+    socket.emit('chat1-message-response', {message: message.toUpperCase().split('').reverse().join('')});
+  });
 });

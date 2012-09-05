@@ -113,12 +113,51 @@ var handlers = {
   'chat1-message-response': function(data, port) {
     dump2Sidebar('got chat1-message-response (worker)');
     chat1Port.postMessage({topic: 'chat-response', data: data});
+  },
+  'chat2-registration': function(data, port) {
+    dump2Sidebar('registered chat2 port (worker)');
+    chat2Port = port;
+  },
+  'chat2-message': function(data, port) {
+    dump2Sidebar('got chat2-message (worker)');
+    sidebarPort.postMessage({topic: 'chat2-message', message: data.data.message});
+  },
+  'chat2-message-response': function(data, port) {
+    dump2Sidebar('got chat2-message-response (worker)');
+    chat2Port.postMessage({topic: 'chat-response', data: data});
+  },
+  'chat3-registration': function(data, port) {
+    dump2Sidebar('registered chat3 port (worker)');
+    chat3Port = port;
+  },
+  'chat3-message': function(data, port) {
+    dump2Sidebar('got chat3-message (worker)');
+    sidebarPort.postMessage({topic: 'chat3-message', message: data.data.message});
+  },
+  'chat3-message-response': function(data, port) {
+    dump2Sidebar('got chat3-message-response (worker)');
+    chat3Port.postMessage({topic: 'chat-response', data: data});
+  },
+  'chat4-registration': function(data, port) {
+    dump2Sidebar('registered chat4 port (worker)');
+    chat4Port = port;
+  },
+  'chat4-message': function(data, port) {
+    dump2Sidebar('got chat4-message (worker)');
+    sidebarPort.postMessage({topic: 'chat4-message', message: data.data.message});
+  },
+  'chat4-message-response': function(data, port) {
+    dump2Sidebar('got chat4-message-response (worker)');
+    chat4Port.postMessage({topic: 'chat-response', data: data});
   }
 };
 
 var apiPort = null;
 var sidebarPort = null;
 var chat1Port = null;
+var chat2Port = null;
+var chat3Port = null;
+var chat4Port = null;
 
 var ports = [];
 
