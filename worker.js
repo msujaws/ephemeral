@@ -98,15 +98,23 @@ var handlers = {
 
     setAmbientNotification();
   },
-  'sidebar.registration': function(data, port){
-    sidebarPort = port;
+  'sidebar.registration': function(data, port) {
     dump2Sidebar('sidebar.registration completed');
+    sidebarPort = port;
+  },
+  'chat1-registration': function(data, port) {
+    dump2Sidebar('registered chat1 port (worker)');
+    chat1Port = port;
+  },
+  'chat1-message-response': function(data, port) {
+    dump2Sidebar('got chat1-message-response (worker)');
+    chat1Port.postMessage({topic: 'chat1-message-response', data: data});
   }
 };
 
-// Side-bar stuff
 var apiPort = null;
 var sidebarPort = null;
+var chat1Port = null;
 
 var ports = [];
 

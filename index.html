@@ -13,10 +13,10 @@
 </ol>
 <textarea id="dump" rows="20"></textarea>
 <map id="map">
-  <area shape="rect" coords="0,0,119,150" href="javascript:navigator.mozSocial.openChatWindow('/chat1')" />
-  <area shape="rect" coords="119,0,249,150" href="javascript:navigator.mozSocial.openChatWindow('/chat2')" />
-  <area shape="rect" coords="0,150,119,296" href="javascript:navigator.mozSocial.openChatWindow('/chat3')" />
-  <area shape="rect" coords="119,150,249,296" href="javascript:navigator.mozSocial.openChatWindow('/chat4')" />
+  <area shape="rect" coords="0,0,119,150" href="javascript:navigator.mozSocial.openChatWindow('/chat1.html')" />
+  <area shape="rect" coords="119,0,249,150" href="javascript:navigator.mozSocial.openChatWindow('/chat2.html')" />
+  <area shape="rect" coords="0,150,119,296" href="javascript:navigator.mozSocial.openChatWindow('/chat3.html')" />
+  <area shape="rect" coords="119,150,249,296" href="javascript:navigator.mozSocial.openChatWindow('/chat4.html')" />
 </map>
 <img src="people.jpg" usemap="#map" style="position:absolute;bottom:0;left:0;" />
 <script src="/socket.io/socket.io.js"></script>
@@ -53,6 +53,14 @@ socket.on('newsfeed-update', function(data) {
     li.appendChild(a);
     s.appendChild(li);
   }
+});
+
+socket.on('chat1-message', function(data) {
+  socket.emit('chat1-message', data.data.message);
+});
+
+socket.on('chat1-message-response', function(data) {
+  port.postMessage({topic: 'chat1-message-response', data: data});
 });
 
 port.onmessage = function(e) {
