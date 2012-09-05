@@ -9,7 +9,12 @@
 <h2>The short-lived social network</h2>
 <script src="/socket.io/socket.io.js"></script>
 <script>
-  var socket = io.connect('/');
+  io.configure(function () {
+    io.set("transports", ["xhr-polling"]);
+    io.set("polling duration", 10);
+  });
+
+  var socket = new io.Socket();
   socket.on('news', function (data) {
     console.log(data);
     socket.emit('my other event', { my: 'data' });
