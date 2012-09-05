@@ -55,8 +55,8 @@ var handlers = {
   },
   'social.user-recommend': function(data, port) {
     dump2Sidebar('got social.user-recommend');
-    for (var i in data)
-      dump2Sidebar(i + " " + data[i]);
+    for (var i in data.data)
+      dump2Sidebar(i + " " + data.data[i]);
     sidebarPort.postMessage({topic: 'share',
                              data: {
                                url: data.data.url,
