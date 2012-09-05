@@ -35,7 +35,7 @@ io.sockets.on('connection', function (socket) {
     messages.push(data.url);
     if (messages.length > 10)
       messages.shift();
-    socket.emit('ambient-update', newMessage);
+    //socket.emit('ambient-update', newMessage);
     socket.emit('newsfeed-update', {news: JSON.stringify(messages)});
   });
   socket.on('unshare', function(data) {
