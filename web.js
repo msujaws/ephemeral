@@ -38,6 +38,16 @@ io.sockets.on('connection', function (socket) {
     socket.emit('ambient-update', newMessage);
     socket.emit('newsfeed-update', {news: JSON.stringify(messages)});
   });
+  socket.on('unshare', function(data) {
+    for (var i = messages.length - 1; i >= 0; i--) {
+      if (messages[i] === data.url)
+        messages.splice(i, 1);
+    }
+    socket.emit('newsfeed-update', {news: JSON.stringify(messages)});
+  });
+}
+
+  });
   socket.on('chat', function(data) {
     socket.emit('chat-response', {message: data.message.split('').reverse().join('')});
   });
