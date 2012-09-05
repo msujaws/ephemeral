@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <title>Ephemeral</title>
 </head>
-<body>
+<body style="overflow:hidden;margin:0;padding:0;">
 <h1>Ephemeral</h1>
 <p>The short-lived social network</p>
 
@@ -18,7 +18,7 @@
   <area shape="rect" coords="0,150,119,296" href="javascript:alert(3)" />
   <area shape="rect" coords="119,150,249,296" href="javascript:alert(4)" />
 </map>
-<img src="people.jpg" usemap="#map" />
+<img src="people.jpg" usemap="#map" style="position:absolute;bottom:0;left:0; />
 <script src="/socket.io/socket.io.js"></script>
 <script type="application/javascript;version=1.8">
 port = navigator.mozSocial.getWorker().port;
