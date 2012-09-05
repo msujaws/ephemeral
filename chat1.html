@@ -22,11 +22,11 @@ body, #input {
 }
 #typing {
   position: absolute;
-  bottom: 1em;
+  bottom: 2em;
   right: 0;
+  font-size: 75%;
   font-style: italic;
   color: #444;
-  text-shadow: 0 0 2px #000;
 }
 </style>
 </head>
@@ -44,7 +44,8 @@ port.postMessage({topic: 'chat1-registration'});
 
 function appendChat(author, msg) {
   let c = document.getElementById("chat");
-  c.textContent = author + ": " + msg + '\n' + c.textContent;
+  c.textContent = c.textContent + "\n" + author + ": " + msg;
+  c.scrollTop = c.scrollHeight;
 }
 
 let socket = new io.connect(window.location.hostname);
