@@ -16,7 +16,7 @@ function setAmbientNotification(){
     data: {
       name: 'mentions',
       iconURL: SPRITES.mentionIcon,
-      counter: notificationCount.mentions,
+      counter: 0,
       contentPanel: baseUrl + '/social/mentions'
     }
   });
@@ -28,6 +28,14 @@ function dump2Sidebar(msg) {
 }
 
 var handlers = {
+  'social.cookie-changed': function(data, port) {
+    dump2Sidebar('got social.cookie-changed (worker)');
+  },
+  'social.user-recommend-prompt': function(data, port) {
+    dump2Sidebar('got social.user-recommend-prompt (worker)');
+    apiPort.postMessage('social.user-recommend-prompt-response',
+                        {url: data.url, images: SPRITES.bugIcon, message: "Share me quick!"});
+  },
   'ambient-update': function(message){
     dump2Sidebar('handling ambient-update (worker)');
     setAmbientNotification();
@@ -57,12 +65,7 @@ var handlers = {
   },
   'sidebar.registration': function(data, port){
     sidebarPort = port;
-    dump2Sidebar('sidebar.registration completed, connecting to Ephemeral');
-
-    sidebarPort.postMessage({
-      topic: 'sidebar.user-info',
-      data: user
-    });
+    dump2Sidebar('sidebar.registration completed');
   }
 };
 
