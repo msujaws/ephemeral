@@ -57,12 +57,16 @@ var handlers = {
     dump2Sidebar('got social.user-recommend');
     sidebarPort.postMessage({topic: 'share',
                              data: {
-                               url: data.url,
+                               url: data.data.url,
                              }
     });
   },
   'social.user-unrecommend': function(data, port) {
     dump2Sidebar('got social.user-unrecommend');
+    sidebarPort.postMessage({topic: 'unshare',
+                             data: {
+                               url: data.data.url,
+                             }
   },
   'ambient-update': function(message){
     dump2Sidebar('handling ambient-update (worker)');
@@ -114,7 +118,7 @@ onconnect = function(e) {
     }
     else {
       try {
-        handler(msg.data, port);
+        handler(msg, port);
       }
       catch(e){
         dump("Error thrown by handler: " + e.toString() + "\n\n\n");
