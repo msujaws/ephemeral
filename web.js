@@ -2,8 +2,14 @@ var app = require('http').createServer(handler)
   , io = require('socket.io').listen(app)
   , fs = require('fs')
 
-var port = process.env.PORT || 80;
+var port = process.env.PORT || 5000;
+console.log("listening on port=" + port);
 app.listen(port);
+
+io.configure(function () {
+  io.set("transports", ["xhr-polling"]);
+  io.set("polling duration", 10);
+});
 
 function handler (req, res) {
   fs.readFile(__dirname + '/index.html',
