@@ -67,6 +67,7 @@ var handlers = {
                              data: {
                                url: data.data.url,
                              }
+    });
   },
   'ambient-update': function(message){
     dump2Sidebar('handling ambient-update (worker)');
