@@ -79,7 +79,7 @@ let input = document.getElementById("input");
 input.addEventListener("keydown", function(e) {
   if (e.keyCode == 13) {
     appendChat('Me', input.value);
-    let reply = eliza.transform(input.value);
+    let reply = eliza.transform(input.value).toUpperCase();
     input.value = '';
     let typing = document.getElementById("typing");
     typing.hidden = false;
