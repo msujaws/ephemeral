@@ -2,6 +2,11 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this file,
  * You can obtain one at http://mozilla.org/MPL/2.0/. */
 
+var firstNames = ["John", "Sally", "Mark", "Felipe", "Joe", "Jose", "Juan", "Jared", "Matt", "Manuel", "Mohammed", "Mehdi", "Fatima", "Mariam", "Ali", "Noah", "Milan", "William", "Henry", "Marie", "Jazmin", "Malcolm", "Daniel", "Jacob", "Santiago", "Olivia", "Mia"];
+var lastNames = ["Smith", "Brown", "Lee", "Wilson", "Mohammad", "Ali", "Dia", "Rodriguez", "Morales", "Gruber", "Maier", "Brunner", "Castro"];
+var firstName = firstNames[Math.floor(Math.random() * firstNames.length)];
+var lastName = lastNames[Math.floor(Math.random() * lastNames.length)];
+var name = firstName + " " + lastName;
 
 var SPRITES = {
   shareIcon: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAJGSURBVDjLpZNLTxpRFMdd+EX8BixZ6VfxQ9imq3YzSdNVE2MNyEMYAeUNofIKEBjA8CoiM4BCgiQgaJqWtjySAc2/585iogG76eI/czN3/r9z7jnnbgDY+B8pj3w+v5nNZncEQdhLp9N8KpUqJhKJYTwel2OxmByJRIbn5+fFUCjEB4PBPZ/Pt+PxeDZVAJm5SqUCURTRarVUNZtNdd1oNFCtVkHBEA6H4XK5OBWQyWQwnU4xHA7RbrdRr9eVn8vlsiK2ZnC2NxqNMB6PcXZ2BhVAacu3t7eYTCYQbr4jIP2ErzWHt/0I780jnOIUjsoDYlcDjH//UYAOh0NWAXTmbTrzUmpew3bRA196gONqAndrARfJevkLXzJ9fI5dwxkvwG63L09OTrZVABMVTBuNRpfVegPWlIRPvhI+nF7gHZ/FG4sAzl2AP1V8YX4BYKJKa6nSy8srEZakiPeneby1CvjoKeJrurRiXgEwUZu0fr9/+a16iVStC9/FNSLCevNaAJPX69W63e6nxWKhdIfMT+vMrwKYnE6nl7WtVCqB53nbPyfxuSjyFvV4l9pU6Xa7yOVysFgsebPZvGs0GrdeBdBoami6ioFAADQXoPHFYDBQ3lQXUHFxfHwMnU5XPDw81KwAyPxDkiTIsozZbIa7uztFDHJ/f698Y3vJZBIHBwejFQClzbFIhUIBnU4H/X4f8/lcUa/XQ61WU+7A0dER9vf3ubU1sNlsGqvVylGqWZPJ1DEYDNDr9SztLqWdpcgcmTXPPX8BpLUNr3FYePgAAAAASUVORK5CYII=",
@@ -85,12 +90,6 @@ var handlers = {
   'social.initialize': function(data, port){
     dump2Sidebar('social.initialize on port ' + JSON.stringify(port));
     apiPort = port;
-
-    var firstNames = ["John", "Sally", "Mark", "Felipe", "Joe", "Jose", "Juan", "Jared", "Matt", "Manuel", "Mohammed", "Mehdi", "Fatima", "Mariam", "Ali", "Noah", "Milan", "William", "Henry", "Marie", "Jazmin", "Malcolm", "Daniel", "Jacob", "Santiago", "Olivia", "Mia"];
-    var lastNames = ["Smith", "Brown", "Lee", "Wilson", "Mohammad", "Ali", "Dia", "Rodriguez", "Morales", "Gruber", "Maier", "Brunner", "Castro"];
-    var firstName = firstNames[Math.floor(Math.random() * firstNames.length)];
-    var lastName = lastNames[Math.floor(Math.random() * lastNames.length)];
-    var name = firstName + " " + lastName;
 
     apiPort.postMessage({
       topic: 'social.user-profile',
