@@ -45,6 +45,7 @@ io.sockets.on('connection', function (socket) {
       if (messages[i] === data.url)
         messages.splice(i, 1);
     }
+    socket.broadcast.emit('newsfeed-update', {news: JSON.stringify(messages)});
     socket.emit('newsfeed-update', {news: JSON.stringify(messages)});
   });
   socket.on('chat1-message', function(message) {
