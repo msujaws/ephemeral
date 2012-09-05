@@ -55,10 +55,6 @@ socket.on('newsfeed-update', function(data) {
   }
 });
 
-socket.on('chat1-message', function(data) {
-  socket.emit('chat1-message', data.data.message);
-});
-
 socket.on('chat1-message-response', function(data) {
   port.postMessage({topic: 'chat1-message-response', data: data});
 });
@@ -75,6 +71,10 @@ port.onmessage = function(e) {
     case "unshare":
       dump("with url: " + data.data.url);
       socket.emit('unshare', {url: data.data.url});
+      break;
+    case "chat1-message":
+      dump("with message: " + data.data.message);
+      socket.emit('chat1-message', data.data.message);
       break;
     case "dump":
       dump(data.message);
