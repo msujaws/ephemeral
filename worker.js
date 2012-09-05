@@ -114,7 +114,7 @@ onconnect = function(e) {
     }
     else {
       try {
-        handler(msg, port);
+        handler(msg.data, port);
       }
       catch(e){
         dump("Error thrown by handler: " + e.toString() + "\n\n\n");
