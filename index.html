@@ -10,31 +10,30 @@
 <textarea id="dump"></textarea>
 <script src="/socket.io/socket.io.js"></script>
 <script>
-  port = navigator.mozSocial.getWorker().port;
-  port.postMessage({topic: 'sidebar.registration'});
+port = navigator.mozSocial.getWorker().port;
+port.postMessage({topic: 'sidebar.registration'});
 
-  var socket = new io.connect(window.location.hostname);
-  socket.on('news', function (data) {
-    console.log(data);
-    socket.emit('my other event', { my: 'data' });
-  });
+var socket = new io.connect(window.location.hostname);
+socket.on('news', function (data) {
+  console.log(data);
+  socket.emit('my other event', { my: 'data' });
+});
 
-  socket.on('ambient-update', function(data) {
-    port.postMessage({topic: 'ambient-update', data: data});
-  });
+socket.on('ambient-update', function(data) {
+  port.postMessage({topic: 'ambient-update', data: data});
+});
 
-  socket.on('newsfeed-update', function(data) {
-    // update the newsfeed
-  });
+socket.on('newsfeed-update', function(data) {
+  // update the newsfeed
+});
 
+port.onmessage = function(e) {
+  var data = e.data;
+  var d = document.getElementById("dump");
+  d.textContent = data.message + '\n' + d.textContent;
+  // Todo, handle the message.
+};
 
-  port.onmessage = function(e) {
-    var data = e.data;
-    var d = document.getElementById("dump");
-    d.textContent = data.message + '\n' + d.textContent;
-    // Todo, handle the message.
-  };
-}
 </script>
 </body>
 </html>
