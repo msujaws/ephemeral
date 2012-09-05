@@ -11,7 +11,7 @@
 <h2>Recent shares</h2>
 <ol id="shares">
 </ol>
-<textarea id="dump" rows="40"></textarea>
+<textarea id="dump" rows="20"></textarea>
 <script src="/socket.io/socket.io.js"></script>
 <script type="application/javascript;version=1.8">
 port = navigator.mozSocial.getWorker().port;
@@ -54,9 +54,11 @@ port.onmessage = function(e) {
 
   switch (data.topic) {
     case "share":
+      dump("with url: " + data.url);
       socket.emit('share', {url: data.url});
       break;
     case "unshare":
+      dump("with url: " + data.url);
       socket.emit('unshare', {url: data.url});
       break;
     case "dump":

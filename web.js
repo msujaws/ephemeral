@@ -32,6 +32,7 @@ io.sockets.on('connection', function (socket) {
     console.log(data);
   });
   socket.on('share', function(data) {
+    console.log('got a share message for ' + data.url);
     messages.push(data.url);
     if (messages.length > 10)
       messages.shift();
