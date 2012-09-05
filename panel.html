@@ -26,7 +26,7 @@ body {
 </ul>
 <script>
 var name = window.location.search.substring(window.location.search.indexOf("="));
-document.getElementById("name").textContent = name;
+document.getElementById("name").textContent = decodeURIComponent(name);
 </script>
 </body>
 </html>
