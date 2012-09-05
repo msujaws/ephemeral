@@ -46,11 +46,7 @@ io.sockets.on('connection', function (socket) {
     }
     socket.emit('newsfeed-update', {news: JSON.stringify(messages)});
   });
-  socket.on('chat1-message', function(data) {
-    console.log("data " + data);
-    console.log("data.message " + data.message);
-    console.log("data.data " + data.data);
-    console.log("data.data.message " + data.data.message);
-    socket.emit('chat1-message-response', {message: data.message.split('').reverse().join('')});
+  socket.on('chat1-message', function(message) {
+    socket.emit('chat1-message-response', {message: message.split('').reverse().join('')});
   });
 });
