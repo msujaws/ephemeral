@@ -84,6 +84,11 @@ var handlers = {
       panelPort.postMessage({topic: 'new-user', data: data.data});
     setAmbientNotification(++count);
   },
+  'ambient-reset': function(data){
+    dump2Sidebar('handling ambient-reset (worker)');
+    count = 0;
+    setAmbientNotification(0);
+  },
   'social.port-closing': function(data, port){
     dump2Sidebar('port-closing (worker), ' + port);
     if (apiPort == port){

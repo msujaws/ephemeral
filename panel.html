@@ -11,6 +11,12 @@ body {
  font-family: 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;
  font-size: 85%;
 }
+#reset {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  font-size: small;
+}
 </style>
 </head>
 <body>
@@ -21,6 +27,7 @@ body {
 <h2>Other users online</h2>
 <ul id="users">
 </ul>
+<a id="reset" href="javascript:port.postMessage({topic: 'ambient-reset'});">Reset notification count</a>
 <script src="/socket.io/socket.io.js"></script>
 <script type="application/javascript;version=1.8">
 port = navigator.mozSocial.getWorker().port;
