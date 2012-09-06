@@ -16,16 +16,30 @@ body {
 <body>
 <img align="left" src="/profile_large.jpg" width="128" height="124" style="margin: 5px;" />
 <h1 id="name"></h1>
-<p>Member since July, 2002</p>
-<p>Total shares: 42</p>
-<h2>Random facts</h2>
-<ul>
-<li>If you have 3 quarters, 4 dimes, and 4 pennies, you have $1.19. You also have the largest amount of money in coins without being able to make change for a dollar.
-<li>The numbers '172' can be found on the back of the U.S. $5 dollar bill in the bushes at the base of the Lincoln Memorial.
-<li>President Kennedy was the fastest random speaker in the world with upwards of 350 words per minute.
-<li>In the average lifetime, a person will walk the equivalent of 5 times around the equator. 
+<p>Member since July, 2002<br />
+42 shares</p>
+<h2>Other users online</h2>
+<ul id="users">
 </ul>
-<script>
+<script src="/socket.io/socket.io.js"></script>
+<script type="application/javascript;version=1.8">
+port = navigator.mozSocial.getWorker().port;
+port.postMessage({topic: 'panel.registration'});
+
+port.onmessage = function(e) {
+  let data = e.data;
+
+  switch (data.topic) {
+    case "new-user":
+      dump("with name: " + data.name);
+      let li = document.createElement("li");
+      li.textContent = data.name;
+      document.getElementById("users").appendChild(li);
+      break;
+  }
+};
+
+
 var name = window.location.search.substring(window.location.search.indexOf("=") + 1);
 document.getElementById("name").textContent = decodeURIComponent(name);
 </script>

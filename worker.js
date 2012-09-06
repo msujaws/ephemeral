@@ -17,13 +17,13 @@ var SPRITES = {
 
 var baseUrl = 'https://warm-bayou-4025.herokuapp.com';
 
-function setAmbientNotification(){
+function setAmbientNotification(count){
   apiPort.postMessage({
     topic: 'social.ambient-notification',
     data: {
       name: 'mentions',
       iconURL: SPRITES.timelineIcon,
-      counter: 0,
+      counter: count || 0,
       contentPanel: baseUrl + '/panel.html?name=' + encodeURIComponent(name)
     }
   });
@@ -35,6 +35,8 @@ function dump2Sidebar(msg) {
   else
     dump("\n\n SIDEBAR NOT AVAILABLE: " + msg + "\n\n");
 }
+
+var count = 0;
 
 var handlers = {
   'social.cookie-changed': function(data, port) {
@@ -76,9 +78,9 @@ var handlers = {
                              }
     });
   },
-  'ambient-update': function(message){
+  'ambient-update': function(data){
     dump2Sidebar('handling ambient-update (worker)');
-    setAmbientNotification();
+    setAmbientNotification(count++);
   },
   'social.port-closing': function(data, port){
     dump2Sidebar('port-closing (worker), ' + port);
@@ -103,9 +105,14 @@ var handlers = {
 
     setAmbientNotification();
   },
+  'panel.registration': function(data, port) {
+    dump2Sidebar('panel.registration completed');
+    panelPort = port;
+  },
   'sidebar.registration': function(data, port) {
     dump2Sidebar('sidebar.registration completed');
     sidebarPort = port;
+    sidebarPort.postMessage('new-connection', {name: name});
   },
   'chat1-registration': function(data, port) {
     dump2Sidebar('registered chat1 port (worker)');
@@ -157,12 +164,13 @@ var handlers = {
   }
 };
 
-var apiPort = null;
-var sidebarPort = null;
-var chat1Port = null;
-var chat2Port = null;
-var chat3Port = null;
-var chat4Port = null;
+var apiPort = null,
+    sidebarPort = null,
+    panelPort = null,
+    chat1Port = null,
+    chat2Port = null,
+    chat3Port = null,
+    chat4Port = null;
 
 var ports = [];
 

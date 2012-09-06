@@ -76,6 +76,13 @@ socket.on('newsfeed-update', function(data) {
   }
 });
 
+socket.on('new-connection', function(data) {
+  if (!panelPort)
+    return;
+  panelPort.postMessage({topic: 'new-user', data: data.name});
+  port.postMessage({topic: 'ambient-update', data: data.name});
+});
+
 socket.on('chat1-message-response', function(data) {
   port.postMessage({topic: 'chat1-message-response', data: data});
 });
@@ -120,6 +127,10 @@ port.onmessage = function(e) {
     case "chat4-message":
       dump("with message: " + data.message);
       socket.emit('chat4-message', data.message);
+      break;
+    case "new-connection":
+      dump("with name: " + data.name);
+      socket.emit('new-connection', data.name);
       break;
     case "dump":
       dump(data.message);
