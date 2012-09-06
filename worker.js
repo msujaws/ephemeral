@@ -82,7 +82,7 @@ var handlers = {
     dump2Sidebar('handling ambient-update (worker)');
     if (panelPort)
       panelPort.postMessage({topic: 'new-user', data: data.name});
-    setAmbientNotification(count++);
+    setAmbientNotification(++count);
   },
   'social.port-closing': function(data, port){
     dump2Sidebar('port-closing (worker), ' + port);
