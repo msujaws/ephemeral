@@ -33,7 +33,7 @@ port.onmessage = function(e) {
     case "new-user":
       dump("with name: " + data.name);
       let li = document.createElement("li");
-      li.textContent = data.name;
+      li.textContent = data.data.name;
       document.getElementById("users").appendChild(li);
       break;
   }
