@@ -73,9 +73,6 @@ socket.on('newsfeed-update', function(data) {
 });
 
 socket.on('new-connection', function(data) {
-  if (!panelPort)
-    return;
-  panelPort.postMessage({topic: 'new-user', data: data.name});
   port.postMessage({topic: 'ambient-update', data: data.name});
 });
 
