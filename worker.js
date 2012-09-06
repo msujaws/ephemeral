@@ -112,7 +112,7 @@ var handlers = {
   'sidebar.registration': function(data, port) {
     dump2Sidebar('sidebar.registration completed');
     sidebarPort = port;
-    sidebarPort.postMessage('new-connection', {name: name});
+    sidebarPort.postMessage({topic: 'new-connection', name: name});
   },
   'chat1-registration': function(data, port) {
     dump2Sidebar('registered chat1 port (worker)');
