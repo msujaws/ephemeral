@@ -31,9 +31,13 @@ port.onmessage = function(e) {
 
   switch (data.topic) {
     case "new-user":
-      dump("with name: " + data.name);
+      dump("\n\ndata: " + data);
+      dump("data.data: " + data.data);
+      dump("data.name: " + data.data);
+      dump("data.data.data: " + data.data);
+      dump("data.data.name: " + data.name);
       let li = document.createElement("li");
-      li.textContent = data.data.name;
+      li.textContent = data.name;
       document.getElementById("users").appendChild(li);
       break;
   }
