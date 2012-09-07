@@ -15,7 +15,8 @@ var SPRITES = {
   timelineIcon: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAQAAAC1+jfqAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAADZSURBVBgZBcFBbo1hGAbQ83+5kRCJhA2IEQMrYAPMxRZMbcLG2ICRGTeUtE1jpr1p3/95nLMV8PnL3eOT07Pr79f+/f34GuAAcPfqgXseunlx6ysADsfC0+3k1n03ODP41oiX2+IReO7KH7sfLr1HPBEsCOKNc0cXPghGDFZUUPHWb+/UIKpYUUXU+LRFBbsYLCqICkbsiArWroKIQVQQFayIYFRQFYwKVtQgqhgxiNixooJdDKIgCtaIHVFB1KAqWFFBVDCiiAoOuzMwfgnqpyCOYCsAAADgP4mZnXDW2crZAAAAAElFTkSuQmCC",
 }
 
-var baseUrl = 'https://warm-bayou-4025.herokuapp.com';
+var debug = true;
+var baseUrl = debug ? 'http://localhost:5000' : 'https://warm-bayou-4025.herokuapp.com';
 
 function setAmbientNotification(count){
   apiPort.postMessage({
@@ -127,7 +128,7 @@ var handlers = {
   },
   'chat1-message': function(data, port) {
     dump2Sidebar('got chat1-message (worker)');
-    sidebarPort.postMessage({topic: 'chat1-message', message: data.data.message});
+    sidebarPort.postMessage({topic: 'chat1-message', name: name, message: data.message});
   },
   'chat1-message-response': function(data, port) {
     dump2Sidebar('got chat1-message-response (worker)');
@@ -139,7 +140,7 @@ var handlers = {
   },
   'chat2-message': function(data, port) {
     dump2Sidebar('got chat2-message (worker)');
-    sidebarPort.postMessage({topic: 'chat2-message', message: data.data.message});
+    sidebarPort.postMessage({topic: 'chat2-message', name: name, message: data.message});
   },
   'chat2-message-response': function(data, port) {
     dump2Sidebar('got chat2-message-response (worker)');
@@ -151,7 +152,7 @@ var handlers = {
   },
   'chat3-message': function(data, port) {
     dump2Sidebar('got chat3-message (worker)');
-    sidebarPort.postMessage({topic: 'chat3-message', message: data.data.message});
+    sidebarPort.postMessage({topic: 'chat3-message', name: name, message: data.message});
   },
   'chat3-message-response': function(data, port) {
     dump2Sidebar('got chat3-message-response (worker)');
@@ -163,7 +164,7 @@ var handlers = {
   },
   'chat4-message': function(data, port) {
     dump2Sidebar('got chat4-message (worker)');
-    sidebarPort.postMessage({topic: 'chat4-message', message: data.data.message});
+    sidebarPort.postMessage({topic: 'chat4-message', name: name, message: data.message});
   },
   'chat4-message-response': function(data, port) {
     dump2Sidebar('got chat4-message-response (worker)');

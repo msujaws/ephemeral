@@ -3,6 +3,8 @@ var app = require('http').createServer(handler)
   , fs = require('fs')
 
 var port = process.env.PORT || 5000;
+console.log("default value for ephemeral is:\n" +
+            '{"origin":"https://warm-bayou-4025.herokuapp.com","name":"Ephemeral","workerURL":"https://warm-bayou-4025.herokuapp.com/worker.js","iconURL":"https://warm-bayou-4025.herokuapp.com/favicon.png","sidebarURL":"https://warm-bayou-4025.herokuapp.com/"}\n');
 console.log("listening on port=" + port);
 app.listen(port);
 
@@ -35,7 +37,7 @@ io.sockets.on('connection', function (socket) {
   socket.on('share', function(data) {
     console.log('got a share message for ' + data.url);
     messages.push(data.url);
-    if (messages.length > 20)
+    if (messages.length > 15)
       messages.shift();
     //socket.broadcast.emit('ambient-update', data.url);
     socket.broadcast.emit('newsfeed-update', {news: JSON.stringify(messages)});
@@ -52,16 +54,16 @@ io.sockets.on('connection', function (socket) {
   socket.on('new-connection', function(name) {
     socket.broadcast.emit('new-connection', {name: name});
   });
-  socket.on('chat1-message', function(message) {
-    socket.emit('chat1-message-response', {message: message.split('').reverse().join('')});
+  socket.on('chat1-message', function(data) {
+    socket.broadcast.emit('chat1-message-response', {name: data.name, message: data.message});
   });
-  socket.on('chat2-message', function(message) {
-    socket.emit('chat2-message-response', {message: message.toUpperCase()});
+  socket.on('chat2-message', function(data) {
+    socket.broadcast.emit('chat2-message-response', {name: data.name, message: data.message});
   });
-  socket.on('chat3-message', function(message) {
-    socket.emit('chat3-message-response', {message: message.toLowerCase()});
+  socket.on('chat3-message', function(data) {
+    socket.broadcast.emit('chat3-message-response', {name: data.name, message: data.message});
   });
-  socket.on('chat4-message', function(message) {
-    socket.emit('chat4-message-response', {message: message.toUpperCase().split('').reverse().join('')});
+  socket.on('chat4-message', function(data) {
+    socket.broadcast.emit('chat4-message-response', {name: data.name, message: data.message});
   });
 });
