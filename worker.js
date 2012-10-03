@@ -25,7 +25,9 @@ function setAmbientNotification(count){
       name: 'mentions',
       iconURL: SPRITES.timelineIcon,
       counter: count || 0,
-      contentPanel: baseUrl + '/panel.html?name=' + encodeURIComponent(name)
+      contentPanel: baseUrl + '/panel.html?name=' + encodeURIComponent(name),
+      label: 'Mentions',
+      menuURL: baseURL + '/mentions.html'
     }
   });
 }
